@@ -18,7 +18,7 @@ npm install
 ```
 
 ## Usage
-```bash
+```
 botkitify <filename>
 ```
 
