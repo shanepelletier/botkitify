@@ -1,0 +1,25 @@
+{
+  "name": "botkitify",
+  "version": "0.0.1",
+  "description": "Easily translate AIML, RiveScript, and more into botkit JS code.",
+  "main": "index.js",
+  "bin": "./botkitify",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shanepelletier/botkitify.git"
+  },
+  "keywords": [
+    "AIML",
+    "RiveScript",
+    "botkit"
+  ],
+  "author": "Shane M. Pelletier <shane.pelletier@unb.ca>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shanepelletier/botkitify/issues"
+  },
+  "homepage": "https://github.com/shanepelletier/botkitify#readme"
+}
