@@ -1,3 +1,5 @@
+## WARNING: botkitify is under active development, and should be considered non-functional for now.
+
 # botkitify
 Easily translate AIML, RiveScript, and more into botkit JS code.
 
