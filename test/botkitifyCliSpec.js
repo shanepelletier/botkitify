@@ -1,5 +1,8 @@
+var should = require('should');
+
 describe('botkitify-cli', function () {
   var binName = './index.js';
+  var index = require('.' + binName);
 
   describe('options', function () {
     var spawn = require('cross-spawn');
@@ -21,7 +24,7 @@ describe('botkitify-cli', function () {
         possibleOption = possibleOptions[i];
         it(possibleOption, function () {
           var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
-          expect(botkitifyCli.stdout.toString()).toEqual(expectedHelpOutput);
+          botkitifyCli.stdout.toString().should.equal(expectedHelpOutput);
         });
       }
 
@@ -30,7 +33,7 @@ describe('botkitify-cli', function () {
         possibleOption = '-' + possibleOptions[i];
         it(possibleOption, function () {
           var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
-          expect(botkitifyCli.stdout.toString()).toEqual(expectedHelpOutput);
+          botkitifyCli.stdout.toString().should.equal(expectedHelpOutput);
         });
       }
 
@@ -39,7 +42,7 @@ describe('botkitify-cli', function () {
         possibleOption = '--' + possibleOptions[i];
         it (possibleOption, function () {
           var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
-          expect(botkitifyCli.stdout.toString()).toEqual(expectedHelpOutput);
+          botkitifyCli.stdout.toString().should.equal(expectedHelpOutput);
         });
       }
     });
