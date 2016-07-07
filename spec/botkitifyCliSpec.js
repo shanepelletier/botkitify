@@ -22,9 +22,8 @@ describe('botkitify-cli', function () {
       for (var i = 0; i < possibleOptions.length; i++) {
         possibleOption = possibleOptions[i];
         it(possibleOption, function () {
-          buffered('sync', 'node', [binName, possibleOption], function (err, data, code) {
-            expect(data).toEqual(expectedHelpOutput);
-          });
+          var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
+          expect(botkitifyCli.stdout.toString()).toEqual(expectedHelpOutput);
         });
       }
 
@@ -32,9 +31,8 @@ describe('botkitify-cli', function () {
       for (var i = 0; i < possibleOptions.length; i++) {
         possibleOption = '-' + possibleOptions[i];
         it(possibleOption, function () {
-          buffered('sync', 'node', [binName, possibleOption], function (err, data, code) {
-            expect(data).toEqual(expectedHelpOutput);
-          });
+          var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
+          expect(botkitifyCli.stdout.toString()).toEqual(expectedHelpOutput);
         });
       }
 
@@ -42,9 +40,8 @@ describe('botkitify-cli', function () {
       for (var i = 0; i < possibleOptions.length; i++) {
         possibleOption = '--' + possibleOptions[i];
         it (possibleOption, function () {
-          buffered('sync', 'node', [binName, possibleOption], function (err, data, code) {
-            expect(data).toEqual(expectedHelpOutput);
-          });
+          var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
+          expect(botkitifyCli.stdout.toString()).toEqual(expectedHelpOutput);
         });
       }
     });
