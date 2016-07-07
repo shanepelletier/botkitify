@@ -1,5 +1,3 @@
-var buffered = require('./support/buffered');
-
 describe('botkitify-cli', function () {
   var binName = './index.js';
 
