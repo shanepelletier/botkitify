@@ -7,7 +7,7 @@
     "botkitify": "index.js"
   },
   "scripts": {
-    "test": "jasmine && istanbul report text-summary lcov",
+    "test": "istanbul cover node_modules/jasmine/bin/jasmine.js",
     "dev": "nodemon --exec jasmine"
   },
   "repository": {
