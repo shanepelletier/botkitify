@@ -1,6 +1,6 @@
 ## WARNING: botkitify is under active development, and should be considered non-functional for now.
 
-# botkitify
+# botkitify [![Build Status](https://travis-ci.org/shanepelletier/botkitify.svg?branch=master)](https://travis-ci.org/shanepelletier/botkitify)
 Easily translate AIML, RiveScript, and more into botkit JS code.
 
 ## Installation
