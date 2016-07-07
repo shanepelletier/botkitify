@@ -7,7 +7,7 @@
     "botkitify": "index.js"
   },
   "scripts": {
-    "test": "jasmine",
+    "test": "jasmine && istanbul report text-summary lcov",
     "dev": "nodemon --exec jasmine"
   },
   "repository": {
@@ -26,7 +26,9 @@
   },
   "homepage": "https://github.com/shanepelletier/botkitify#readme",
   "devDependencies": {
+    "coveralls": "^2.11.9",
     "cross-spawn": "^4.0.0",
+    "istanbul": "^0.4.4",
     "jasmine": "^2.4.1",
     "nodemon": "^1.9.2"
   }
