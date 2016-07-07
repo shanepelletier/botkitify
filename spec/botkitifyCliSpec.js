@@ -19,36 +19,33 @@ describe('botkitify-cli', function () {
       // For command style e.g. 'help'
       for (var i = 0; i < possibleOptions.length; i++) {
         possibleOption = possibleOptions[i];
-        it(possibleOption, function (done) {
-          var botkitifyCli = spawn(binName, [possibleOption]);
-          botkitifyCli.stdout.on('data', function (data) {
-            expect(data.toString()).toEqual(expectedHelpOutput);
-            done();
-          });
+        it(possibleOption, function () {
+          var botkitifyCli = spawn.sync(binName, [possibleOption]);
+          //botkitifyCli.stdout.on('data', function (data) {
+            expect(botkitifyCli.stdout.toString()).toEqual(expectedHelpOutput);
+          //});
         });
       }
 
       // For single dash style e.g. '-help'
       for (var i = 0; i < possibleOptions.length; i++) {
         possibleOption = '-' + possibleOptions[i];
-        it(possibleOption, function (done) {
-          var botkitifyCli = spawn(binName, [possibleOption]);
-          botkitifyCli.stdout.on('data', function (data) {
-            expect(data.toString()).toEqual(expectedHelpOutput);
-            done();
-          });
+        it(possibleOption, function () {
+          var botkitifyCli = spawn.sync(binName, [possibleOption]);
+          //botkitifyCli.stdout.on('data', function (data) {
+            expect(botkitifyCli.stdout.toString()).toEqual(expectedHelpOutput);
+          //});
         });
       }
 
       // For double dash style e.g. '--help'
       for (var i = 0; i < possibleOptions.length; i++) {
         possibleOption = '--' + possibleOptions[i];
-        it (possibleOption, function (done) {
-          var botkitifyCli = spawn(binName, [possibleOption]);
-          botkitifyCli.stdout.on('data', function (data) {
-            expect(data.toString()).toEqual(expectedHelpOutput);
-            done();
-          });
+        it (possibleOption, function () {
+          var botkitifyCli = spawn.sync(binName, [possibleOption]);
+          //botkitifyCli.stdout.on('data', function (data) {
+            expect(botkitifyCli.stdout.toString()).toEqual(expectedHelpOutput);
+          //});
         });
       }
     });
