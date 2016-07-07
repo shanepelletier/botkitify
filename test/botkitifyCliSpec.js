@@ -1,3 +1,5 @@
+'use strict';
+
 var should = require('should');
 
 describe('botkitify-cli', function () {
@@ -6,6 +8,7 @@ describe('botkitify-cli', function () {
 
   describe('options', function () {
     var spawn = require('cross-spawn');
+    this.slow(200);
 
     function generateAllPossibleOptions (string) {
       var allPossibleOptions = [];
@@ -21,7 +24,7 @@ describe('botkitify-cli', function () {
 
       // For command style e.g. 'help'
       for (var i = 0; i < possibleOptions.length; i++) {
-        possibleOption = possibleOptions[i];
+        var possibleOption = possibleOptions[i];
         it(possibleOption, function () {
           var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
           botkitifyCli.stdout.toString().should.equal(expectedHelpOutput);
@@ -30,7 +33,7 @@ describe('botkitify-cli', function () {
 
       // For single dash style e.g. '-help'
       for (var i = 0; i < possibleOptions.length; i++) {
-        possibleOption = '-' + possibleOptions[i];
+        var possibleOption = '-' + possibleOptions[i];
         it(possibleOption, function () {
           var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
           botkitifyCli.stdout.toString().should.equal(expectedHelpOutput);
@@ -39,10 +42,42 @@ describe('botkitify-cli', function () {
 
       // For double dash style e.g. '--help'
       for (var i = 0; i < possibleOptions.length; i++) {
-        possibleOption = '--' + possibleOptions[i];
+        var possibleOption = '--' + possibleOptions[i];
         it (possibleOption, function () {
           var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
           botkitifyCli.stdout.toString().should.equal(expectedHelpOutput);
+        });
+      }
+    });
+
+    describe('produces version when ran with', function () {
+      var possibleOptions = generateAllPossibleOptions('version');
+      var expectedVersion = require('../package.json').version + '\n';
+
+      // For command style e.g. 'version'
+      for (var i = 0; i < possibleOptions.length; i++) {
+        var possibleOption = possibleOptions[i];
+        it(possibleOption, function () {
+          var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
+          botkitifyCli.stdout.toString().should.equal(expectedVersion);
+        });
+      }
+
+      // For single dash style e.g. '-version'
+      for (var i = 0; i < possibleOptions.length; i++) {
+        var possibleOption = '-' + possibleOptions[i];
+        it(possibleOption, function () {
+          var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
+          botkitifyCli.stdout.toString().should.equal(expectedVersion);
+        });
+      }
+
+      // For double dash style e.g. '--version'
+      for (var i = 0; i < possibleOptions.length; i++) {
+        var possibleOption = '--' + possibleOptions[i];
+        it (possibleOption, function () {
+          var botkitifyCli = spawn.sync('node', [binName, possibleOption]);
+          botkitifyCli.stdout.toString().should.equal(expectedVersion);
         });
       }
     });
