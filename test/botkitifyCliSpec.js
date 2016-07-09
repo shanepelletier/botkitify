@@ -9,7 +9,8 @@ context('botkitify-cli', function () {
 
   describe('options', function () {
     var spawn = require('cross-spawn');
-    this.slow(200);
+    // Spawning a new process takes some time, so raise the default 'slow' time
+    this.slow(300);
 
     describe('should produce help output when ran with', function () {
       var possibleOptions = utils.generateAllPossibleOptions('help');

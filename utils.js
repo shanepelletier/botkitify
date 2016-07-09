@@ -10,6 +10,7 @@ module.exports.generateAllPossibleOptions = function (string) {
   for (var i = 1; i < string.length + 1; i++) {
     allPossibleOptions.push(string.substring(0, i));
   }
+
   return allPossibleOptions;
 };
 
@@ -24,6 +25,7 @@ module.exports.removeDashes = function (string) {
   } else if (string[0] == '-') {
     numDashes = 1;
   }
+
   string = string.substring(numDashes);
 
   return string;

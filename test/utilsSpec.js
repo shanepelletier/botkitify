@@ -5,7 +5,7 @@ var utils = require('../utils.js');
 
 context('Utils', function () {
   describe('#generateAllPossibleOptions', function () {
-    it ('should return an empty array for no input', function () {
+    it('should return an empty array for no input', function () {
       var expectedPossibleOptions = [];
       var allPossibleOptions = utils.generateAllPossibleOptions();
 
@@ -13,7 +13,7 @@ context('Utils', function () {
       allPossibleOptions.should.be.empty();
     });
 
-    it ('should return an empty array for an empty string', function () {
+    it('should return an empty array for an empty string', function () {
       var expectedPossibleOptions = [];
       var allPossibleOptions = utils.generateAllPossibleOptions('');
 
