@@ -29,7 +29,6 @@
     "coveralls": "^2.11.9",
     "cross-spawn": "^4.0.0",
     "istanbul": "^0.4.4",
-    "jasmine": "^2.4.1",
     "mocha": "^2.5.3",
     "mocha-lcov-reporter": "^1.2.0",
     "nodemon": "^1.9.2",
