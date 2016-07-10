@@ -32,7 +32,10 @@
     "mocha": "^2.5.3",
     "mocha-lcov-reporter": "^1.2.0",
     "nodemon": "^1.9.2",
-    "should": "^9.0.2"
+    "proxyquire": "^1.7.10",
+    "should": "^9.0.2",
+    "should-sinon": "0.0.5",
+    "sinon": "^1.17.4"
   },
   "dependencies": {
     "escodegen": "^1.8.0",

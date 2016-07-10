@@ -5,9 +5,7 @@ var parseString = require('xml2js').parseString;
 module.exports.parse = function (stringToParse, callback) {
 
   if (arguments.length < 2) {
-    throw new Error('Too few arguments: need exactly two arguments');
-  } else if (arguments.length > 2) {
-    throw new Error('Too many arguments: need exactly two arguments');
+    throw new Error('Too few arguments: need at least two arguments');
   }
 
   if (typeof stringToParse !== 'string') {
@@ -19,10 +17,16 @@ module.exports.parse = function (stringToParse, callback) {
   }
 
   parseString(stringToParse, function (err, _result) {
-    var result = {
-      trigger: _result.aiml.pattern[0].toLowerCase(),
-      response: _result.aiml.template[0]
-    };
+    var result = [];
+
+    for (var i = 0; i < _result.aiml.pattern.length; i++) {
+      var tempObj = {
+        trigger: _result.aiml.pattern[i].toLowerCase(),
+        responses: [_result.aiml.template[i]]
+      };
+
+      result.push(tempObj);
+    }
 
     callback(result);
   });

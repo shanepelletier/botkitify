@@ -16,6 +16,11 @@ context('botkitify-cli', function () {
       var possibleOptions = utils.generateAllPossibleOptions('help');
       var expectedHelpOutput = 'botkitify - Easily translate AIML, RiveScript, and more into botkit JS code.\n\nUsage:\n    botkitify <filename> [options | commands]\n    botkitify [options] <filename>\n    botkitify -h | --help\n\nOptions:\n    -h --help     Show this screen.\n    -v --version  Show version.\n\nNote: All options are also available as commands, e.g. botkitify help\n'
 
+      it('no arguments', function () {
+        var botkitifyCli = spawn.sync('node', [binName]);
+        botkitifyCli.stdout.toString().should.equal(expectedHelpOutput);
+      });
+
       // For command style e.g. 'help'
       for (var i = 0; i < possibleOptions.length; i++) {
         var possibleOption = possibleOptions[i];

@@ -1,5 +1,7 @@
 'use strict';
 
+var l = require('./logger.js');
+
 module.exports.generateAllPossibleOptions = function (string) {
   var allPossibleOptions = [];
 
@@ -31,7 +33,7 @@ module.exports.removeDashes = function (string) {
   return string;
 };
 
-module.exports.parseOptions = function (string) {
+module.exports.parseOption = function (string) {
 
   var helpText = 'botkitify - Easily translate AIML, RiveScript, and more into botkit JS code.\n\nUsage:\n    botkitify <filename> [options | commands]\n    botkitify [options] <filename>\n    botkitify -h | --help\n\nOptions:\n    -h --help     Show this screen.\n    -v --version  Show version.\n\nNote: All options are also available as commands, e.g. botkitify help';
   var version = require('./package.json').version;
@@ -49,3 +51,22 @@ module.exports.parseOptions = function (string) {
 
   return helpText;
 };
+
+module.exports.handleArguments = function (argv) {
+  if (argv === undefined) {
+    l.log(this.parseOption());
+    return;
+  }
+
+  if (argv.length < 3) {
+    l.log(this.parseOption());
+    return;
+  }
+
+  for (var i = 2; i < argv.length; i++) {
+    var arg = argv[i];
+    arg = this.removeDashes(arg);
+
+    l.log(this.parseOption(arg));
+  }
+}

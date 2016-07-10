@@ -1,6 +1,9 @@
 'use strict';
 
 var should = require('should');
+var sinon = require('sinon');
+require('should-sinon');
+var proxyquire = require('proxyquire');
 var utils = require('../utils.js');
 
 context('Utils', function () {
@@ -65,12 +68,12 @@ context('Utils', function () {
     });
   });
 
-  describe('#parseOptions', function () {
+  describe('#parseOption', function () {
     var helpText = 'botkitify - Easily translate AIML, RiveScript, and more into botkit JS code.\n\nUsage:\n    botkitify <filename> [options | commands]\n    botkitify [options] <filename>\n    botkitify -h | --help\n\nOptions:\n    -h --help     Show this screen.\n    -v --version  Show version.\n\nNote: All options are also available as commands, e.g. botkitify help';
     var version = require('../package.json').version;
 
     it('should return help text when called with no arguments', function () {
-      var parsedOption = utils.parseOptions();
+      var parsedOption = utils.parseOption();
       var expectedResult = helpText;
 
       parsedOption.should.be.a.String();
@@ -78,7 +81,7 @@ context('Utils', function () {
     });
 
     it('should return help text when called with an empty string', function () {
-      var parsedOption = utils.parseOptions('');
+      var parsedOption = utils.parseOption('');
       var expectedResult = helpText;
 
       parsedOption.should.be.a.String();
@@ -86,7 +89,7 @@ context('Utils', function () {
     });
 
     it('should return help text when called with \'help\'', function () {
-      var parsedOption = utils.parseOptions('help');
+      var parsedOption = utils.parseOption('help');
       var expectedResult = helpText;
 
       parsedOption.should.be.a.String();
@@ -94,11 +97,36 @@ context('Utils', function () {
     });
 
     it('should return version number when called with \'version\'', function () {
-      var parsedOption = utils.parseOptions('version');
+      var parsedOption = utils.parseOption('version');
       var expectedResult = version;
 
       parsedOption.should.be.a.String();
       parsedOption.should.equal(expectedResult);
+    });
+  });
+
+  describe('#handleArguments', function () {
+    var helpText = 'botkitify - Easily translate AIML, RiveScript, and more into botkit JS code.\n\nUsage:\n    botkitify <filename> [options | commands]\n    botkitify [options] <filename>\n    botkitify -h | --help\n\nOptions:\n    -h --help     Show this screen.\n    -v --version  Show version.\n\nNote: All options are also available as commands, e.g. botkitify help';
+    var version = require('../package.json').version;
+
+    var l = {
+      log: sinon.spy()
+    };
+
+    var utils = proxyquire('../utils.js', {
+      './logger.js': l
+    });
+
+    it('should output help text when called with no arguments', function () {
+      utils.handleArguments();
+
+      l.log.should.be.calledWith(helpText);
+    });
+
+    it('should output help text when called with less than three arguments', function () {
+      utils.handleArguments(['first', 'second']);
+
+      l.log.should.be.calledWith(helpText);
     });
   });
 });

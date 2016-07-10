@@ -12,16 +12,24 @@ context('BotkitGenerator', function () {
       generatedResult.should.be.empty();
     });
 
-    it('should return empty string when called with an empty string', function () {
-      var generatedResult = botkitGenerator.generate('');
+    it('should return empty string when called with an empty array', function () {
+      var generatedResult = botkitGenerator.generate([]);
 
       generatedResult.should.be.a.String();
       generatedResult.should.be.empty();
     });
 
-    it('should return \'controller.hears(\'hi\', function (bot, message) { bot.reply(message, \'Hi! How are you?\'); });\' when called with {trigger: \`hi\`, response: \'Hi! How are you?\'}', function () {
+    it('should return \'controller.hears(\'hi\', function (bot, message) { bot.reply(message, \'Hi! How are you?\'); });\' when called with [{trigger: \`hi\`, responses: [\'Hi! How are you?\']}]', function () {
       var expectedResult = 'controller.hears(\'hi\', function (bot, message) {\n    bot.reply(message, \'Hi! How are you?\');\n});';
-      var generatedResult = botkitGenerator.generate({trigger: 'hi', response: 'Hi! How are you?'});
+      var generatedResult = botkitGenerator.generate([{trigger: 'hi', responses: ['Hi! How are you?']}]);
+
+      generatedResult.should.be.a.String();
+      generatedResult.should.equal(expectedResult);
+    });
+
+    it('should return  \'controller.hears(\'hi\', function (bot, message) { bot.reply(message, \'Hi! How are you?\'); });\ncontroller.hears(\'bye\', function (bot, message) { bot.reply(message, \'Good bye!\'); });\' when called with [{trigger: \'hi\', responses: [\'Hi! How are you?\']}, {trigger: \'bye\', responses: [\'Good bye!\']}]', function () {
+      var expectedResult = 'controller.hears(\'hi\', function (bot, message) {\n    bot.reply(message, \'Hi! How are you?\');\n});controller.hears(\'bye\', function (bot, message) {\n    bot.reply(message, \'Good bye!\');\n});';
+      var generatedResult = botkitGenerator.generate([{trigger: 'hi', responses: ['Hi! How are you?']}, {trigger: 'bye', responses: ['Good bye!']}]);
 
       generatedResult.should.be.a.String();
       generatedResult.should.equal(expectedResult);
