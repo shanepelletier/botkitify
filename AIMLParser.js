@@ -19,6 +19,11 @@ module.exports.parse = function (stringToParse, callback) {
   parseString(stringToParse, function (err, _result) {
     var result = [];
 
+    // istanbul ignore if
+    if (_result === undefined) {
+      callback();
+    }
+
     for (var i = 0; i < _result.aiml.pattern.length; i++) {
       var tempObj = {
         trigger: _result.aiml.pattern[i].toLowerCase(),
