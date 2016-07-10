@@ -19,16 +19,16 @@ context('BotkitGenerator', function () {
       generatedResult.should.be.empty();
     });
 
-    it('should return \'controller.hears(\'hi\', function (bot, message) { bot.reply(message, \'Hi! How are you?\'); });\' when called with [{trigger: \`hi\`, responses: [\'Hi! How are you?\']}]', function () {
-      var expectedResult = 'controller.hears(\'hi\', function (bot, message) {\n    bot.reply(message, \'Hi! How are you?\');\n});';
+    it('should return \'controller.hears(\'hi\', [\'direct_message\'] function (bot, message) { bot.reply(message, \'Hi! How are you?\'); });\' when called with [{trigger: \`hi\`, responses: [\'Hi! How are you?\']}]', function () {
+      var expectedResult = 'controller.hears(\'hi\', [\'direct_message\'], function (bot, message) {\n    bot.reply(message, \'Hi! How are you?\');\n});';
       var generatedResult = botkitGenerator.generate([{trigger: 'hi', responses: ['Hi! How are you?']}]);
 
       generatedResult.should.be.a.String();
       generatedResult.should.equal(expectedResult);
     });
 
-    it('should return  \'controller.hears(\'hi\', function (bot, message) { bot.reply(message, \'Hi! How are you?\'); });\ncontroller.hears(\'bye\', function (bot, message) { bot.reply(message, \'Good bye!\'); });\' when called with [{trigger: \'hi\', responses: [\'Hi! How are you?\']}, {trigger: \'bye\', responses: [\'Good bye!\']}]', function () {
-      var expectedResult = 'controller.hears(\'hi\', function (bot, message) {\n    bot.reply(message, \'Hi! How are you?\');\n});controller.hears(\'bye\', function (bot, message) {\n    bot.reply(message, \'Good bye!\');\n});';
+    it('should return  \'controller.hears(\'hi\', [\'direct_message\'] function (bot, message) { bot.reply(message, \'Hi! How are you?\'); });\ncontroller.hears(\'bye\', [\'direct_message\'],function (bot, message) { bot.reply(message, \'Good bye!\'); });\' when called with [{trigger: \'hi\', responses: [\'Hi! How are you?\']}, {trigger: \'bye\', responses: [\'Good bye!\']}]', function () {
+      var expectedResult = 'controller.hears(\'hi\', [\'direct_message\'], function (bot, message) {\n    bot.reply(message, \'Hi! How are you?\');\n});controller.hears(\'bye\', [\'direct_message\'], function (bot, message) {\n    bot.reply(message, \'Good bye!\');\n});';
       var generatedResult = botkitGenerator.generate([{trigger: 'hi', responses: ['Hi! How are you?']}, {trigger: 'bye', responses: ['Good bye!']}]);
 
       generatedResult.should.be.a.String();

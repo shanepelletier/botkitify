@@ -11,7 +11,7 @@ module.exports.generate = function (ast) {
   var generatedCode = '';
 
   for (var i = 0; i < ast.length; i++) {
-    var template = estemplate('controller.hears(<%= trigger %>, function (bot, message) { bot.reply(message, <%= response %>) })', {
+    var template = estemplate('controller.hears(<%= trigger %>, [\'direct_message\'],function (bot, message) { bot.reply(message, <%= response %>) })', {
       trigger: {type: 'Literal', value: ast[i].trigger},
       response: {type: 'Literal', value: ast[i].responses[0]}
     });

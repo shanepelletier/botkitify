@@ -1,6 +1,9 @@
 'use strict';
 
+var fs = require('fs');
 var l = require('./logger.js');
+var AIMLParser = require('./AIMLParser.js');
+var botkitGenerator = require('./botkitGenerator.js');
 
 module.exports.generateAllPossibleOptions = function (string) {
   var allPossibleOptions = [];
@@ -42,6 +45,10 @@ module.exports.parseOption = function (string) {
     return helpText;
   }
 
+  if (string === '') {
+    return helpText;
+  }
+
   var firstLetter = string[0];
   if (firstLetter === 'h') {
     return helpText;
@@ -49,7 +56,15 @@ module.exports.parseOption = function (string) {
     return version;
   }
 
-  return helpText;
+  // return helpText;
+  /* istanbul ignore next */
+  fs.readFile(string, function (err, data) {
+    if (data !== undefined) {
+      AIMLParser.parse(data.toString(), function (result) {
+        fs.writeFile('out.js', botkitGenerator.generate(result));
+      });
+    }
+  });
 };
 
 module.exports.handleArguments = function (argv) {
