@@ -3,8 +3,6 @@
 # botkitify [![Build Status](https://travis-ci.org/shanepelletier/botkitify.svg?branch=master)](https://travis-ci.org/shanepelletier/botkitify) [![Coverage Status](https://coveralls.io/repos/github/shanepelletier/botkitify/badge.svg?branch=master)](https://coveralls.io/github/shanepelletier/botkitify?branch=master)
 Easily translate AIML, RiveScript, and more into botkit JS code.
 
-<a href="https://app.codesponsor.io/link/rcAXs9FphCdsK1YyJ9DKxX93/shanepelletier/botkitify" rel="nofollow"><img src="https://app.codesponsor.io/embed/rcAXs9FphCdsK1YyJ9DKxX93/shanepelletier/botkitify.svg" style="width: 888px; height: 68px;" alt="Sponsor" /></a>
-
 ## Installation
 Via NPM:
 ```bash
@@ -27,3 +25,5 @@ botkitify <filename>
 ```
 
 botkitify is smart enough to figure out the type of file that is passed to it, but you can also specify the file type by using the ```-t``` option. Currently available options are ```r[ivescipt]``` or ```a[iml]```.
+
+<a href="https://app.codesponsor.io/link/rcAXs9FphCdsK1YyJ9DKxX93/shanepelletier/botkitify" rel="nofollow"><img src="https://app.codesponsor.io/embed/rcAXs9FphCdsK1YyJ9DKxX93/shanepelletier/botkitify.svg" style="width: 888px; height: 68px;" alt="Sponsor" /></a>
